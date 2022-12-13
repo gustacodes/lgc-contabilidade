@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="252.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lgc.contabilidade.lgcontabilidade.controller.ExcluirController">
+   <children>
+      <Text layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Excluir funcionário">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="excluirCodigo" layoutX="63.0" layoutY="48.0" prefHeight="26.0" prefWidth="78.0" promptText="Código" />
+      <Text layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código:" />
+      <Button layoutX="153.0" layoutY="49.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+      <Separator layoutX="14.0" layoutY="88.0" prefHeight="0.0" prefWidth="462.0" />
+      <Text layoutX="14.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
+      <Text layoutX="15.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cargo:" />
+      <Text layoutX="10.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código:" />
+      <Button layoutX="191.0" layoutY="195.0" mnemonicParsing="false" onAction="#excluir" prefHeight="42.0" prefWidth="106.0" style="-fx-background-color: #FF0000;" text="Excluir" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Text fx:id="nomeEx" layoutX="63.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="329.6206512451172">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fx:id="cargoEx" layoutX="63.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="329.6206512451172">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fx:id="codigoEx" layoutX="63.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="329.6206512451172">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+   </children>
+</AnchorPane>
