@@ -1,6 +1,5 @@
 package com.lgc.contabilidade.lgcontabilidade;
 
-import com.lgc.contabilidade.lgcontabilidade.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

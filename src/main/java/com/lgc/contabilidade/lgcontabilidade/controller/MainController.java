@@ -1,15 +1,12 @@
 package com.lgc.contabilidade.lgcontabilidade.controller;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.lowagie.text.*;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfWriter;
-import com.lowagie.toolbox.Toolbox;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.lgc.contabilidade.lgcontabilidade.Main;
 import com.lgc.contabilidade.lgcontabilidade.dao.ConexaoBD;
 import com.lgc.contabilidade.lgcontabilidade.model.Registros;
-import com.lowagie.text.Table;
-import com.lowagie.text.Cell;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,8 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javax.swing.*;
-import javax.swing.text.html.HTMLDocument;
+
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -39,7 +35,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
-import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -344,38 +339,50 @@ public class MainController implements Initializable {
             texto.setAlignment(Element.ALIGN_CENTER);
             documento.add(texto);
 
-            Table tabela = new Table(7);
+            PdfPTable tabela = new PdfPTable(7);
 
-            tabela.setWidth(70f);
-            tabela.setPadding(2);
-            tabela.setBorderWidth(1);
-            tabela.setBorder(10);
             tabela.setWidths(new float[]{8f, 8f, 8f, 8f, 8f, 8f, 8f});
 
+            PdfPCell dataTabela = new PdfPCell(new Paragraph(new Phrase( "DATA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F))));
+            PdfPCell horaTabela = new PdfPCell(new Paragraph(new Phrase("ENTRADA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F))));
+            PdfPCell saidaAlmocoTabela = new PdfPCell(new Paragraph(new Phrase("SAÍDA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F))));
+            PdfPCell voltaAlmocoTabela = new PdfPCell(new Paragraph(new Phrase("VOLTA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F))));
+            PdfPCell saidaCasaTabela = new PdfPCell(new Paragraph(new Phrase("SAÍDA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F))));
+            PdfPCell totalTabela = new PdfPCell(new Paragraph(new Phrase("TOTAL", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F))));
+            PdfPCell extraTabela = new PdfPCell(new Paragraph(new Phrase("EXTRAS", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F))));
+
+            tabela.addCell(dataTabela);
+            tabela.addCell(horaTabela);
+            tabela.addCell(saidaAlmocoTabela);
+            tabela.addCell(voltaAlmocoTabela);
+            tabela.addCell(saidaCasaTabela);
+            tabela.addCell(totalTabela);
+            tabela.addCell(extraTabela);
+
             //COLUNAS
-            Paragraph dataTabela = new Paragraph(new Phrase( "DATA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
-            dataTabela.setAlignment(Element.ALIGN_CENTER);
+            //Paragraph dataTabela = new Paragraph(new Phrase( "DATA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
+            //dataTabela.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph horaTabela = new Paragraph(new Phrase("ENTRADA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
-            horaTabela.setAlignment(Element.ALIGN_CENTER);
+            //Paragraph horaTabela = new Paragraph(new Phrase("ENTRADA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
+            //horaTabela.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph saidaAlmocoTabela = new Paragraph(new Phrase("SAÍDA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
-            saidaAlmocoTabela.setAlignment(Element.ALIGN_CENTER);
+            //Paragraph saidaAlmocoTabela = new Paragraph(new Phrase("SAÍDA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
+            //saidaAlmocoTabela.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph voltaAlmocoTabela = new Paragraph(new Phrase("VOLTA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
-            voltaAlmocoTabela.setAlignment(Element.ALIGN_CENTER);
+            //Paragraph voltaAlmocoTabela = new Paragraph(new Phrase("VOLTA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
+            //voltaAlmocoTabela.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph saidaCasaTabela = new Paragraph(new Phrase("SAÍDA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
-            saidaAlmocoTabela.setAlignment(Element.ALIGN_CENTER);
+            //Paragraph saidaCasaTabela = new Paragraph(new Phrase("SAÍDA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
+            //saidaAlmocoTabela.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph totalTabela = new Paragraph(new Phrase("TOTAL", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
-            totalTabela.setAlignment(Element.ALIGN_CENTER);
+            //Paragraph totalTabela = new Paragraph(new Phrase("TOTAL", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
+            //totalTabela.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph extraTabela = new Paragraph(new Phrase("EXTRAS", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
-            extraTabela.setAlignment(Element.ALIGN_CENTER);
+            //Paragraph extraTabela = new Paragraph(new Phrase("EXTRAS", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8F)));
+            //extraTabela.setAlignment(Element.ALIGN_CENTER);
 
             //TABELAS
-            Cell cellData = new Cell(dataTabela);
+            /*Cell cellData = new Cell(cel1);
             Cell cellHora = new Cell(horaTabela);
             Cell cellSaidaAl = new Cell(saidaAlmocoTabela);
             Cell cellVoltaAlmoco = new Cell(voltaAlmocoTabela);
@@ -405,7 +412,7 @@ public class MainController implements Initializable {
             tabela.addCell(cellVoltaAlmoco);
             tabela.addCell(cellSaiCasa);
             tabela.addCell(cellTotal);
-            tabela.addCell(cellExtra);
+            tabela.addCell(cellExtra);*/
 
             String sqll = "SELECT * FROM Registros";
             int horaBanco = 0, soma = 0, hora = 0;
@@ -439,13 +446,21 @@ public class MainController implements Initializable {
                     Paragraph totalExtraCell = new Paragraph(new Phrase(rs.getString("extras"), FontFactory.getFont(FontFactory.HELVETICA, 8F)));
                     totalExtraCell.setAlignment(Element.ALIGN_CENTER);
 
-                    Cell cellDate = new Cell(dateCell);
-                    Cell cellEntrada = new Cell(entradaCell);
-                    Cell cellSaidaAlmoco = new Cell(saidaAlmocoCell);
-                    Cell cellVoltaAl = new Cell(voltaAlmocoCell);
-                    Cell cellSai = new Cell(saiCasaCell);
-                    Cell cellTotalHoras = new Cell(totalCell);
-                    Cell cellTotalExtras = new Cell(totalExtraCell);
+                    PdfPCell cellDate = new PdfPCell(dateCell);
+                    PdfPCell cellEntrada = new PdfPCell(entradaCell);
+                    PdfPCell cellSaidaAlmoco = new PdfPCell(saidaAlmocoCell);
+                    PdfPCell cellVoltaAl = new PdfPCell(voltaAlmocoCell);
+                    PdfPCell cellSai = new PdfPCell(saiCasaCell);
+                    PdfPCell cellTotalHoras = new PdfPCell(totalCell);
+                    PdfPCell cellTotalExtras = new PdfPCell(totalExtraCell);
+
+                    //Cell cellDate = new Cell(dateCell);
+                    //Cell cellEntrada = new Cell(entradaCell);
+                    //Cell cellSaidaAlmoco = new Cell(saidaAlmocoCell);
+                    //Cell cellVoltaAl = new Cell(voltaAlmocoCell);
+                    //Cell cellSai = new Cell(saiCasaCell);
+                    //Cell cellTotalHoras = new Cell(totalCell);
+                    //Cell cellTotalExtras = new Cell(totalExtraCell);
 
                     cellDate.setHorizontalAlignment(Element.ALIGN_CENTER);
                     cellEntrada.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -463,15 +478,15 @@ public class MainController implements Initializable {
                     tabela.addCell(cellTotalHoras);
 
                         if(totalExtraCell.toString().contains("-")){
-                            cellTotalExtras.setBackgroundColor(new Color(255, 0, 0));
+                            cellTotalExtras.setBackgroundColor(BaseColor.RED);
                             tabela.addCell(cellTotalExtras);
 
                         } else if(totalExtraCell.toString().contains("0:00")){
                             tabela.addCell(cellTotalExtras);
-                            cellTotalExtras.setBackgroundColor(new Color(29, 151, 254));
+                            cellTotalExtras.setBackgroundColor(BaseColor.BLUE);
 
                         } else {
-                            cellTotalExtras.setBackgroundColor(new Color(0, 245, 0));
+                            cellTotalExtras.setBackgroundColor(BaseColor.GREEN);
                             tabela.addCell(cellTotalExtras);
                         }
 
@@ -497,7 +512,7 @@ public class MainController implements Initializable {
             documento.add(tabela);
             documento.add(linhaEmBranco);
 
-        Paragraph funciTxt = new Paragraph(new Phrase("                FUNCIONÁRIO: " + funcionario.getText() + "\n                 MÊS: " + dat.getMonth().getDisplayName(TextStyle.FULL, new Locale(String.format("pt", "BR"))) + "\n                 EXTRAS: " + hora + "h " + soma + "m", FontFactory.getFont(FontFactory.COURIER_BOLD, 8F)));
+            Paragraph funciTxt = new Paragraph(new Phrase("                FUNCIONÁRIO: " + funcionario.getText() + "\n                 MÊS: " + dat.getMonth().getDisplayName(TextStyle.FULL, new Locale(String.format("pt", "BR"))) + "\n                 EXTRAS: " + hora + "h " + soma + "m", FontFactory.getFont(FontFactory.COURIER_BOLD, 8F)));
             funciTxt.setAlignment(Element.ALIGN_JUSTIFIED);
 
             documento.add(funciTxt);
